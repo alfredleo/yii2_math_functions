@@ -1,0 +1,27 @@
+<div id='app'>
+    <ul>
+        <li v-for='aircraft in aircrafts'>
+            {{aircraft}}
+        </li>
+    </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            aircrafts: []
+        },
+        created() {
+            fetch('http://localhost:3000/aircraft?limit=5')
+                .then(response => response.json())
+                .then(json => {
+                    this.aircrafts = json
+                })
+        }
+    });
+	app.config.devtools = true;
+</script>
